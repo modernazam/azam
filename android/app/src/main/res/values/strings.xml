@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TashkentSuperMarket</string>
+    <string name="facebook_app_id">1017976675216406</string>
+    <string name="ak_login_protocol_scheme">ak1017976675216406</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">fb557771608123485fb557771608123485</string>
+    <string name="api_key">AIzaSyBcdFkSbAj4uEoVM-_AGqrZkRN0yVrIpQs</string>
+</resources>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "306289363677",
+    "firebase_url": "https://tashkent-supermarket.firebaseio.com",
+    "project_id": "tashkent-supermarket",
+    "storage_bucket": "tashkent-supermarket.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306289363677:android:58053e6d56b2df74a6e934",
+        "android_client_info": {
+          "package_name": "com.tashkentsupermarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306289363677-al6j005qqs2bgmn7kar4j1r1co6apmav.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tashkentsupermarket",
+            "certificate_hash": "175411af1c5ad9641bb3044cc57119e3c281f7e1"
+          }
+        },
+        {
+          "client_id": "306289363677-ckt2s8vb2g74rigufcnkrvaji6ovrha6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDwjb4f6AQizUJFN5517ZYhNq6FQw4aQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306289363677-ckt2s8vb2g74rigufcnkrvaji6ovrha6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
