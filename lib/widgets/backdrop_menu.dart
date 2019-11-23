@@ -35,8 +35,8 @@ class _BackdropMenuState extends State<BackdropMenu>
   Widget build(BuildContext context) {
     final category = Provider.of<CategoryModel>(context);
 
-    return ListenableProvider(
-        builder: (_) => category,
+    return ListenableProvider.value(
+        value: category,
         child: Consumer<CategoryModel>(builder: (context, value, child) {
           if (value.isLoading) {
             return Center(child: kLoadingWidget(context));

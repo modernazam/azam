@@ -1,6 +1,38 @@
 {
+  "HorizonLayout": [
+      {
+        "layout": "logo",
+        "showMenu": true
+      },
+      {
+        "layout": "bannerImage"
+      },
+      { 
+        "name": "Bakery Collections",
+        "image": "",
+        "layout": "threeColumn",
+        "category": 58
+      },
+      { 
+        "name": "Cold Food Collections",
+        "image": "",
+        "layout": "threeColumn",
+        "category": 69
+      },
+      { 
+        "name": "Hot Food Collections",
+        "image": "",
+        "layout": "twoColumn",
+        "category": 142
+      }
+    ],
     "Setting": {
       "MainColor": "#3FC1BE",
       "ProductListLayout": "list"
+    },
+    "VerticalLayout": {
+      "layout": "pinterest",
+      "name": "Recent Collections",
+      "image": ""
     }
 }

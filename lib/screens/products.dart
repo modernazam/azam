@@ -165,8 +165,8 @@ class ProductsPageState extends State<ProductsPage> with SingleTickerProviderSta
           expandingBottomSheet: ExpandingBottomSheet(hideController: _controller),
         );
 
-    return ListenableProvider(
-      builder: (_) => product,
+    return ListenableProvider.value(
+      value: product,
       child: Consumer<ProductModel>(builder: (context, value, child) {
         return backdrop(
             products: value.productsList,

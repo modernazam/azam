@@ -16,8 +16,8 @@ class _UserScreenState extends State<UserScreen> {
   Widget build(BuildContext context) {
     final userModel = Provider.of<UserModel>(context);
 
-    return ListenableProvider(
-        builder: (_) => userModel,
+    return ListenableProvider.value(
+        value: userModel,
         child: Consumer<UserModel>(builder: (context, value, child) {
 
           if (value.user != null) {

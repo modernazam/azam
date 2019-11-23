@@ -170,7 +170,7 @@ class StateProductVariant extends State<ProductVariant> {
         productVariation != null ? productVariation.id != null : true;
     final isExternal = product.affiliateUrl != null ? true : false;
 
-    print('product: ' + check.toString() + ' ' + inStock.toString() + ' ' + available.toString() + ' ' + isExternal.toString());
+    //print('product: ' + check.toString() + ' ' + inStock.toString() + ' ' + available.toString() + ' ' + isExternal.toString());
 
     listwidget.add(
       SizedBox(height: 10.0),
@@ -204,7 +204,7 @@ class StateProductVariant extends State<ProductVariant> {
     ///*
     listwidget.add(
       Row(
-        children: <Widget>[/*
+        children: <Widget>[
           Expanded(
             child: GestureDetector(
               onTap: (inStock &&
@@ -235,7 +235,7 @@ class StateProductVariant extends State<ProductVariant> {
               ),
             ),
           ),
-          SizedBox(width: 10),*/
+          SizedBox(width: 10),
           Container(
             decoration: BoxDecoration(color: theme.backgroundColor),
             child: QuantitySelection(

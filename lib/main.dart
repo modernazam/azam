@@ -6,8 +6,10 @@ import 'app.dart';
 void main() async {
 
   Provider.debugCheckInvalidValueType = null;
+
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  
   runApp(App());
 
 }

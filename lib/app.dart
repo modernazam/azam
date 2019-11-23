@@ -9,33 +9,31 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flare_splash_screen/flare_splash_screen.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
-import 'package:tashkentsupermarket/common/config.dart';
-import 'package:tashkentsupermarket/models/cart.dart';
-import 'package:tashkentsupermarket/models/category.dart';
-import 'package:tashkentsupermarket/models/order.dart';
-import 'package:tashkentsupermarket/models/payment_method.dart';
-import 'package:tashkentsupermarket/models/product.dart';
-import 'package:tashkentsupermarket/models/recent_product.dart';
-import 'package:tashkentsupermarket/models/search.dart';
-import 'package:tashkentsupermarket/models/shipping_method.dart';
-import 'package:tashkentsupermarket/models/user.dart';
-import 'package:tashkentsupermarket/models/wishlist.dart';
-import 'package:tashkentsupermarket/screens/cart.dart';
-import 'package:tashkentsupermarket/screens/checkout/index.dart';
-import 'package:tashkentsupermarket/screens/login.dart';
-import 'package:tashkentsupermarket/screens/notification.dart';
-import 'package:tashkentsupermarket/screens/orders.dart';
-import 'package:tashkentsupermarket/screens/products.dart';
-import 'package:tashkentsupermarket/screens/registration.dart';
-import 'package:tashkentsupermarket/services/index.dart';
+import 'common/config.dart';
+import 'common/tools.dart';
+import 'common/styles.dart';
 
-import 'package:tashkentsupermarket/tabbar.dart';
-
-import 'package:tashkentsupermarket/models/app.dart';
-import 'package:tashkentsupermarket/screens/onboard_screen.dart';
-
-import 'package:tashkentsupermarket/common/tools.dart';
-import 'package:tashkentsupermarket/common/styles.dart';
+import 'models/app.dart';
+import 'models/cart.dart';
+import 'models/category.dart';
+import 'models/order.dart';
+import 'models/payment_method.dart';
+import 'models/product.dart';
+import 'models/recent_product.dart';
+import 'models/search.dart';
+import 'models/shipping_method.dart';
+import 'models/user.dart';
+import 'models/wishlist.dart';
+import 'screens/cart.dart';
+import 'screens/checkout/index.dart';
+import 'screens/login.dart';
+import 'screens/notification.dart';
+import 'screens/orders.dart';
+import 'screens/products.dart';
+import 'screens/registration.dart';
+import 'screens/onboard_screen.dart';
+import 'services/index.dart';
+import 'tabbar.dart';
 
 
 FirebaseAnalytics analytics = FirebaseAnalytics();
@@ -48,9 +46,8 @@ class SplashScreenAnimate extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreenAnimate> {
   
-  static SharedPreferences prefs;
-  static Future checkFirstSeen() async {
-    prefs = await SharedPreferences.getInstance();
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     bool _seen = (prefs.getBool('seen') ?? false);
 
     if (_seen)

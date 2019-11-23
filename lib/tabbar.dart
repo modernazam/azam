@@ -2,16 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:tashkentsupermarket/common/constants.dart';
-import 'package:tashkentsupermarket/common/tools.dart';
-import 'package:tashkentsupermarket/models/cart.dart';
-import 'package:tashkentsupermarket/models/category.dart';
-import 'package:tashkentsupermarket/models/product.dart';
-import 'package:tashkentsupermarket/screens/cart.dart';
-import 'package:tashkentsupermarket/screens/categories/index.dart';
-import 'package:tashkentsupermarket/screens/home.dart';
-import 'package:tashkentsupermarket/screens/search/search.dart';
-import 'package:tashkentsupermarket/screens/user.dart';
+import 'common/constants.dart';
+import 'common/tools.dart';
+import 'models/cart.dart';
+import 'models/category.dart';
+import 'models/product.dart';
+import 'screens/cart.dart';
+import 'screens/categories/index.dart';
+import 'screens/home.dart';
+import 'screens/search/search.dart';
+import 'screens/user.dart';
 
 import 'models/user.dart';
 

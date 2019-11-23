@@ -40,8 +40,8 @@ class _StateSearchScreen extends State<SearchScreen> {
   }
 
   Widget _renderSearchLayout() {
-    return ListenableProvider<SearchModel>(
-      builder: (_) => Provider.of<SearchModel>(context),
+    return ListenableProvider<SearchModel>.value(
+      value: Provider.of<SearchModel>(context),
       child: Consumer<SearchModel>(builder: (context, model, child) {
         if (searchText == null || searchText.isEmpty) {
           return Padding(

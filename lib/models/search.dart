@@ -52,7 +52,7 @@ class SearchModel extends ChangeNotifier{
 
   getKeywords() async {
     try{
-      SharedPreferences.setMockInitialValues({});
+      //SharedPreferences.setMockInitialValues({});
       SharedPreferences prefs = await SharedPreferences.getInstance();
       final list = prefs.getStringList("recentSearches");
       if(list != null && list.length > 0){

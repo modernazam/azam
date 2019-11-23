@@ -76,8 +76,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           elevation: 0.0,
         ),
         body: SafeArea(
-            child: ListenableProvider<UserModel>(
-          builder: (_) => Provider.of<UserModel>(context),
+            child: ListenableProvider<UserModel>.value(
+          value: Provider.of<UserModel>(context),
           child: Consumer<UserModel>(builder: (context, value, child) {
             return SingleChildScrollView(
               child: Padding(

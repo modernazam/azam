@@ -44,7 +44,7 @@ class CategoriesScreenState extends State<CategoriesScreen>
 
     _focus = new FocusNode();
     _focus.addListener(_onFocusChange);
-
+    
     Future.delayed(Duration.zero, () {
       Provider.of<CategoryModel>(context).getCategories();
     });
@@ -67,8 +67,8 @@ class CategoriesScreenState extends State<CategoriesScreen>
     super.build(context);
     final category = Provider.of<CategoryModel>(context);
 
-    return ListenableProvider(
-        builder: (_) => category,
+    return ListenableProvider.value(
+        value: category,
         child: Consumer<CategoryModel>(
           builder: (context, value, child) {
             if (value.isLoading) {

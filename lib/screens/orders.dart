@@ -36,8 +36,8 @@ class _MyOrdersState extends State<MyOrders> with AfterLayoutMixin {
           backgroundColor: kGrey200,
           elevation: 0.0,
         ),
-        body: ListenableProvider<OrderModel>(
-            builder: (_) => Provider.of<OrderModel>(context),
+        body: ListenableProvider<OrderModel>.value(
+            value: Provider.of<OrderModel>(context),
             child: Consumer<OrderModel>(builder: (context, model, child) {
               if (model.isLoading) {
                 return Center(

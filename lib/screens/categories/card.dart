@@ -72,7 +72,7 @@ class CategoryCardItem extends StatelessWidget {
               Product.showList(context: context, cateId: category.id, cateName: category.name);
             },
       child: Container(
-        height: screenSize.width * 0.30,
+        height: screenSize.width * 0.44,
         padding: EdgeInsets.only(left: 10, right: 10),
         margin: EdgeInsets.only(bottom: 10),
         child: Stack(

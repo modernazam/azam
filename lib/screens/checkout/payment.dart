@@ -45,8 +45,8 @@ class _PaymentMethodsState extends State<PaymentMethods> {
     final cartModel = Provider.of<CartModel>(context);
     final paymentMethodModel = Provider.of<PaymentMethodModel>(context);
 
-    return ListenableProvider<PaymentMethodModel>(
-        builder: (_) => paymentMethodModel,
+    return ListenableProvider<PaymentMethodModel>.value(
+        value: paymentMethodModel,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

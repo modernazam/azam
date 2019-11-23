@@ -37,8 +37,8 @@ class _ShippingMethodsState extends State<ShippingMethods> {
       children: <Widget>[
         Text("Shipping Method", style: TextStyle(fontSize: 16)),
         SizedBox(height: 20),
-        ListenableProvider<ShippingMethodModel>(
-          builder: (_) => shippingMethodModel,
+        ListenableProvider<ShippingMethodModel>.value(
+          value: shippingMethodModel,
           child: Consumer<ShippingMethodModel>(builder: (context, model, child) {
             if (model.isLoading) {
               return Container(

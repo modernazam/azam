@@ -7,8 +7,8 @@ import 'package:tashkentsupermarket/widgets/product/product_card_view.dart';
 class Recent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListenableProvider<SearchModel>(
-      builder: (_) => Provider.of<SearchModel>(context),
+    return ListenableProvider<SearchModel>.value(
+      value: Provider.of<SearchModel>(context),
       child: Consumer<SearchModel>(builder: (context, model, child) {
         if (model.products == null || model.products.isEmpty) {
           return Container();

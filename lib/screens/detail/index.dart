@@ -91,7 +91,6 @@ class _DetailState extends State<Detail> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final widthHeight = MediaQuery.of(context).size.height;
-    //final user = Provider.of<UserModel>(context).user;
 
     return Container(
       color: Theme.of(context).backgroundColor,

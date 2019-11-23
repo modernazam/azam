@@ -14,8 +14,8 @@ class RecentSearches extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
     final widthContent = (screenSize.width / 2) - 4;
 
-    return ListenableProvider(
-      builder: (_) => Provider.of<SearchModel>(context),
+    return ListenableProvider.value(
+      value: Provider.of<SearchModel>(context),
       child: Consumer<SearchModel>(builder: (context, model, child) {
         return Column(
           children: <Widget>[

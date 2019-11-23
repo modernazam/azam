@@ -121,8 +121,8 @@ class _LoginPageState extends State<LoginScreen> {
       body: SafeArea(
         child: Builder(
           builder: (context) => Stack(children: [
-            ListenableProvider<UserModel>(
-              builder: (_) => Provider.of<UserModel>(context),
+            ListenableProvider<UserModel>.value(
+              value: Provider.of<UserModel>(context),
               child: Consumer<UserModel>(builder: (context, model, child) {
                 return SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),

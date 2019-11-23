@@ -49,6 +49,7 @@ class Tools {
   }
 
   static NetworkImage networkImage(String url, [kSize size = kSize.medium]) {
+    print('kDefaultImage: ' + kDefaultImage);
     return NetworkImage(formatImage(url, size) ?? kDefaultImage);
   }
 
