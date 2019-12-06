@@ -8,6 +8,7 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flare_splash_screen/flare_splash_screen.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:tashkentsupermarket/screens/wishlist.dart' as prefix0;
 
 import 'common/config.dart';
 import 'common/tools.dart';
@@ -135,7 +136,7 @@ class AppState extends State<App> with AfterLayoutMixin {
                     "/home": (context) => MainTabs(),
                     '/orders': (context) => MyOrders(),
                     "/login": (context) => LoginScreen(),
-                    '/wishlist': (context) => WishList(),
+                    '/wishlist': (context) => prefix0.WishList(),
                     '/checkout': (context) => Checkout(),
                     '/notify': (context) => Notifications(),
                     '/products': (context) => ProductsPage(),

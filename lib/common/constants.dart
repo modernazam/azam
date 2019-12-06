@@ -4,7 +4,7 @@ const kAppConfig = 'lib/common/config.json';
 
 const kDefaultImage = "https://user-images.githubusercontent.com/1459805/58628416-d3056f00-8303-11e9-9212-00179a1f3682.jpg";
 
-const kProfileBackground = "https://images.unsplash.com/photo-1494253109108-2e30c049369b?ixlib=rb-1.2.1&auto=format&fit=crop&w=3150&q=80";
+const kProfileBackground = "https://images.unsplash.com/photo-1573481078935-b9605167e06b?ixlib=rb-1.2.1&auto=format&fit=crop&w=3150&q=80";
 
 const kLogoImage = 'assets/images/logo.png';
 

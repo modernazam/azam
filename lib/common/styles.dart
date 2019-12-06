@@ -115,7 +115,7 @@ TextTheme _buildTextTheme(TextTheme base) {
 }
 
 const ColorScheme kColorScheme = ColorScheme(
-  primary: kTeal100,
+  primary: kTeal50,
   primaryVariant: kGrey900,
   secondary: kTeal50,
   secondaryVariant: kGrey900,

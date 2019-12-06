@@ -16,6 +16,7 @@ const Payments = {
   "paypal": "assets/icons/payment/paypal.png",
   "stripe": "assets/icons/payment/stripe.png",
   "razorpay": "assets/icons/payment/razorpay.png",
+  "cardknox": "assets/icons/payment/cardknox.png",
 };
 
 
@@ -30,7 +31,7 @@ const kAdvanceConfig = {
     "DefaultCurrency": {"symbol": "\$", "decimalDigits": 2},
     "IsRequiredLogin": false,
     "GuestCheckout": true,
-    "EnableShipping": false,
+    "EnableShipping": true,
     "GridCount": 3,
     "DetailedBlogLayout": kBlogLayout.halfSizeImageType
 };

@@ -232,8 +232,8 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                         Provider.of<CartModel>(context)
                             .setPaymentMethod(paymentMethod);
 
-                        if (paymentMethod.id == "cod" ||
-                            serverConfig["type"] != "woo") {
+                        if (!(paymentMethod.id == "cod" ||
+                            serverConfig["type"] != "woo")) {
                           createOrder();
                         } else {
                           final user = Provider.of<UserModel>(context).user;

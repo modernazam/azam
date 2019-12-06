@@ -44,7 +44,8 @@ class WishListState extends State<WishList> with SingleTickerProviderStateMixin 
               },
             ),
             title: Text("My Wishlist"),
-            backgroundColor: Color(0xFFEBEBED)),
+            backgroundColor: Color(0xFFEBEBED)
+        ),
         body: ListenableProvider.value(
             value: Provider.of<WishListModel>(context),
             child: Consumer<WishListModel>(builder: (context, model, child) {

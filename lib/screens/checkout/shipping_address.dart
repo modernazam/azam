@@ -111,7 +111,7 @@ class _ShippingAddressState extends State<ShippingAddress> {
                     SizedBox(
                       height: 10.0,
                     ),
-                    if (kGoogleAPIKey.isNotEmpty)
+                    if (!kGoogleAPIKey.isNotEmpty)
                       Row(children: [
                         Expanded(
                           child: ButtonTheme(

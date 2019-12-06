@@ -68,17 +68,20 @@ class SettingScreenState extends State<SettingScreen>
     final wishListCount = Provider.of<WishListModel>(context).products.length;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      floatingActionButton: FloatingActionButton(
+      backgroundColor: Theme.of(context).backgroundColor,/*
+      floatingActionButton: (widget.user.username == config.adminEmail)
+          ? FloatingActionButton(
               backgroundColor: Theme.of(context).primaryColor,
               onPressed: () {
-                //
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ListChat(user: widget.user))); //
               },
               child: Icon(
                 Icons.chat,
                 size: 22,
               ),
-            ),
+            )
+          : SmartChat(user: widget.user),*/
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -228,7 +231,7 @@ class SettingScreenState extends State<SettingScreen>
                               indent: 75,
                               //endIndent: 20,
                             )
-                          : Container(),
+                          : Container(),/*
                       Divider(
                         color: Colors.black12,
                         height: 1.0,
@@ -257,7 +260,7 @@ class SettingScreenState extends State<SettingScreen>
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
-                      ),
+                      ),*/
                       SizedBox(height: 30.0),
                       Text("Order Detail",
                           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),

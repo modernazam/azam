@@ -232,9 +232,9 @@ class CategoryItem extends StatelessWidget {
                 color: Colors.white,
                 size: 20,
               ),
-            SizedBox(
-              width: 20,
-            )
+              SizedBox(
+                width: 20,
+              )
           ],
         ),
       ),

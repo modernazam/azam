@@ -4,6 +4,7 @@ import 'package:flutter_signin_button/button_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tashkentsupermarket/common/config.dart';
+import 'package:tashkentsupermarket/common/tools.dart';
 import 'package:tashkentsupermarket/models/user.dart';
 import 'package:tashkentsupermarket/screens/registration.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -128,19 +129,19 @@ class _LoginPageState extends State<LoginScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: Column(
                     children: <Widget>[
-                      const SizedBox(height: 80.0),
+                      const SizedBox(height: 10.0),
                       Column(
                         children: <Widget>[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Container(height: 40.0, child: Image.asset('assets/images/logo.png')),
+                              Container(height: 70.0, child: Image.asset('assets/images/logo.png')),
                             ],
                           ),
                         ],
                       ),
 
-                      const SizedBox(height: 120.0),
+                      const SizedBox(height: 60.0),
 
                       TextField(
                           controller: _usernameController,
@@ -214,19 +215,19 @@ class _LoginPageState extends State<LoginScreen> {
                             elevation: 0.4,
                             fillColor: Colors.grey.shade50,
                             padding: const EdgeInsets.all(15.0),
-                          ),
+                          ),/*
                           RawMaterialButton(
                             onPressed: () => _loginSMS(context),
                             child: Icon(
-                              FontAwesomeIcons.sms,
-                              color: Colors.lightBlue,
+                              FontAwesomeIcons.googlePlusG,
+                              color: HexColor('#dd4b39'),
                               size: 24.0,
                             ),
                             shape: CircleBorder(),
                             elevation: 0.4,
                             fillColor: Colors.grey.shade50,
                             padding: const EdgeInsets.all(15.0),
-                          ),
+                          ),*/
                         ],
                       ),
 
@@ -256,7 +257,10 @@ class _LoginPageState extends State<LoginScreen> {
                             ],
                           ),
                         ],
-                      )
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
 
 //            FlatButton(
 //              child: const Text('CANCEL'),

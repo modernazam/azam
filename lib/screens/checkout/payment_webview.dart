@@ -42,8 +42,8 @@ class PaymentWebviewState extends State<PaymentWebview> {
     var bytes = convert.utf8.encode(str);
     var base64Str = convert.base64.encode(bytes);
 
-    final checkoutUrl = serverConfig['url'] + "/mstore-checkout/?order=$base64Str";
-
+    final checkoutUrl = serverConfig['url'] + "checkout/?order=$base64Str";
+    print('checkoutUrl: ' + checkoutUrl);
     return WebviewScaffold(
       url: checkoutUrl,
       appBar: AppBar(

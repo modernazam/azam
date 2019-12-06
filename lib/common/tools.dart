@@ -42,6 +42,9 @@ class Tools {
           imageURL = '$pathWithoutExt-262x328$ext';
           break;
       }
+      if (pathWithoutExt == 'https://tashkentsupermarket.com/wp-content/uploads/woocommerce-placeholder-262x328') {
+        return '$pathWithoutExt$ext';
+      }
       return imageURL;
     } else {
       return url;

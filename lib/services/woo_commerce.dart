@@ -34,7 +34,7 @@ class WooCommerce implements BaseServices {
   Future getNonce({method = 'register'}) async {
     try {
       http.Response response = await http.get(
-          "$url/api/get_nonce/?controller=mstore_user&method=$method&$isSecure");
+          "$url/api/get_nonce/?controller=user&method=$method&$isSecure");
       if (response.statusCode == 200) {
         return convert.jsonDecode(response.body)['nonce'];
       } else {
@@ -146,16 +146,17 @@ class WooCommerce implements BaseServices {
     const cookieLifeTime = 120960000000;
 
     try {
-      var endPoint = "$url/api/mstore_user/fb_connect/?second=$cookieLifeTime"
+      var endPoint = "$url/api/user/fb_connect/?second=$cookieLifeTime"
           "&access_token=$token$isSecure";
 
       var response = await http.get(endPoint);
-
       var jsonDecode = convert.jsonDecode(response.body);
+      print('$token$isSecure');
 
       if (jsonDecode['status'] != 'ok') {
         return jsonDecode['msg'];
       }
+      print(jsonDecode);
 
       return User.fromJsonFB(jsonDecode);
     } catch (e) {
@@ -168,7 +169,7 @@ class WooCommerce implements BaseServices {
   Future<User> loginSMS({String token}) async {
     try {
       var endPoint =
-          "$url/api/mstore_user/sms_login/?access_token=$token$isSecure";
+          "$url/api/user/sms_login/?access_token=$token$isSecure";
 
       var response = await http.get(endPoint);
 
@@ -261,7 +262,9 @@ class WooCommerce implements BaseServices {
     try {
       final params =
           Order().toJson(cartModel, user.user != null ? user.user.id : null);
+      print('orders: ' + params.toString());
       var response = await wcApi.postAsync("orders", params);
+      print('response: ' + response.toString());
       if (cartModel.shippingMethod == null) {
         response["shipping_lines"][0]["method_title"] = null;
       }
@@ -310,10 +313,10 @@ class WooCommerce implements BaseServices {
   @override
   Future<User> getUserInfo(cookie) async {
     try {
-//      print("$url/api/mstore_user/get_currentuserinfo/?cookie=$cookie&$isSecure");
+//      print("$url/api/user/get_currentuserinfo/?cookie=$cookie&$isSecure");
 
       final http.Response response = await http.get(
-          "$url/api/mstore_user/get_currentuserinfo/?cookie=$cookie&$isSecure");
+          "$url/api/user/get_currentuserinfo/?cookie=$cookie&$isSecure");
       if (response.statusCode == 200) {
         return User.fromAuthUser(
             convert.jsonDecode(response.body)['user'], cookie);
@@ -332,7 +335,7 @@ class WooCommerce implements BaseServices {
       String niceName = firstName + lastName;
       var nonce = await getNonce();
       final http.Response response = await http.get(
-          "$url/api/mstore_user/register/?insecure=cool&nonce=$nonce&username=$username&user_pass=$password&email=$username&user_nicename=$niceName&display_name=$niceName&$isSecure");
+          "$url/api/user/register/?insecure=cool&nonce=$nonce&username=$username&user_pass=$password&email=$username&user_nicename=$niceName&display_name=$niceName&$isSecure");
       if (response.statusCode == 200) {
         var cookie = convert.jsonDecode(response.body)['cookie'];
         return await this.getUserInfo(cookie);
@@ -351,7 +354,7 @@ class WooCommerce implements BaseServices {
     var cookieLifeTime = 120960000000;
     try {
       final http.Response response = await http.get(
-          "$url/api/mstore_user/generate_auth_cookie/?second=$cookieLifeTime&username=$username&password=$password&$isSecure");
+          "$url/api/user/generate_auth_cookie/?second=$cookieLifeTime&username=$username&password=$password&$isSecure");
 
       if (response.statusCode == 200) {
         var cookie = convert.jsonDecode(response.body)['cookie'];
