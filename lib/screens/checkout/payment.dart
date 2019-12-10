@@ -4,11 +4,13 @@ import 'package:tashkentsupermarket/common/config.dart';
 import 'package:tashkentsupermarket/common/constants.dart';
 import 'package:tashkentsupermarket/common/styles.dart';
 import 'package:tashkentsupermarket/common/tools.dart';
+import 'package:tashkentsupermarket/models/credit_card_model.dart';
 import 'package:tashkentsupermarket/models/order.dart';
 import 'package:tashkentsupermarket/models/payment_method.dart';
 import 'package:tashkentsupermarket/models/user.dart';
 import 'package:tashkentsupermarket/models/cart.dart';
 import 'package:tashkentsupermarket/services/index.dart';
+import 'package:tashkentsupermarket/widgets/credit_card_form.dart';
 
 import 'payment_webview.dart';
 import 'package:localstorage/localstorage.dart';
@@ -25,6 +27,10 @@ class PaymentMethods extends StatefulWidget {
 
 class _PaymentMethodsState extends State<PaymentMethods> {
   String selectedId;
+
+  String cardNumber = '';
+  String expiryDate = '';
+  String cvvCode = '';
 
   @override
   void initState() {
@@ -58,7 +64,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                 fontSize: 12,
                 color: Theme.of(context).accentColor.withOpacity(0.6),
               ),
-            ),
+            ),/*
             SizedBox(height: 20),
             Consumer<PaymentMethodModel>(builder: (context, model, child) {
               if (model.isLoading) {
@@ -81,77 +87,81 @@ class _PaymentMethodsState extends State<PaymentMethods> {
 
               return Column(
                 children: <Widget>[
-                  for (int i = 0; i < model.paymentMethods.length; i++)
-                    model.paymentMethods[i].enabled
-                        ? Column(
-                            children: <Widget>[
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    selectedId = model.paymentMethods[i].id;
-                                  });
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: model.paymentMethods[i].id ==
-                                              selectedId
-                                          ? Theme.of(context).primaryColorLight
-                                          : Colors.transparent),
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 15, horizontal: 10),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Radio(
-                                            value: model.paymentMethods[i].id,
-                                            groupValue: selectedId,
-                                            onChanged: (i) {
-                                              setState(() {
-                                                selectedId = i;
-                                              });
-                                            }),
-                                        SizedBox(width: 10),
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              if (Payments[model
-                                                      .paymentMethods[i].id] !=
-                                                  null)
-                                                Image.asset(
-                                                  Payments[model
-                                                      .paymentMethods[i].id],
-                                                  width: 120,
-                                                  height: 30,
-                                                ),
-                                              if (Payments[model
-                                                      .paymentMethods[i].id] ==
-                                                  null)
-                                                Text(
-                                                  model.paymentMethods[i].title,
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Theme.of(context)
-                                                        .accentColor
-                                                        .withOpacity(0.8),
+                    for (int i = 0; i < model.paymentMethods.length; i++)
+                      model.paymentMethods[i].enabled
+                          ? Column(
+                              children: <Widget>[
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      selectedId = model.paymentMethods[i].id;
+                                    });
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: model.paymentMethods[i].id ==
+                                                selectedId
+                                            ? Theme.of(context).primaryColorLight
+                                            : Colors.transparent),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 15, horizontal: 10),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Radio(
+                                              value: model.paymentMethods[i].id,
+                                              groupValue: selectedId,
+                                              onChanged: (i) {
+                                                setState(() {
+                                                  selectedId = i;
+                                                });
+                                              }),
+                                          SizedBox(width: 10),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                if (Payments[model
+                                                        .paymentMethods[i].id] !=
+                                                    null)
+                                                  Image.asset(
+                                                    Payments[model
+                                                        .paymentMethods[i].id],
+                                                    width: 120,
+                                                    height: 30,
                                                   ),
-                                                )
-                                            ],
-                                          ),
-                                        )
-                                      ],
+                                                if (Payments[model
+                                                        .paymentMethods[i].id] ==
+                                                    null)
+                                                  Text(
+                                                    model.paymentMethods[i].title,
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Theme.of(context)
+                                                          .accentColor
+                                                          .withOpacity(0.8),
+                                                    ),
+                                                  )
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Divider(height: 1)
-                            ],
-                          )
-                        : Container()
+                                Divider(height: 1)
+                              ],
+                            )
+                          : Container()
                 ],
               );
             }),
+            SizedBox(height: 20),*/
+            CreditCardForm(
+                onCreditCardModelChange: onCreditCardModelChange,
+            ),
             SizedBox(height: 20),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
@@ -226,11 +236,12 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                   height: 45,
                   child: RaisedButton(
                     onPressed: () {
+                      final paymentMethod = paymentMethodModel.paymentMethods
+                          .firstWhere((item) => item.id == "cardknox");
+                      Provider.of<CartModel>(context)
+                          .setPaymentMethod(paymentMethod);
+                      /*
                       if (paymentMethodModel.paymentMethods.length > 0) {
-                        final paymentMethod = paymentMethodModel.paymentMethods
-                            .firstWhere((item) => item.id == selectedId);
-                        Provider.of<CartModel>(context)
-                            .setPaymentMethod(paymentMethod);
 
                         if (!(paymentMethod.id == "cod" ||
                             serverConfig["type"] != "woo")) {
@@ -250,7 +261,8 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                                     })),
                           );
                         }
-                      }
+                      }*/
+                      createOrder();
                     },
                     textColor: Colors.white,
                     color: Theme.of(context).primaryColor,
@@ -279,37 +291,59 @@ class _PaymentMethodsState extends State<PaymentMethods> {
         ));
   }
 
-  void createOrder() async {
-    final LocalStorage storage = new LocalStorage('data_order');
-    var listOrder = [];
-    bool isLoggedIn = Provider.of<UserModel>(context).loggedIn;
-
-    _showLoading();
-    final cartModel = Provider.of<CartModel>(context);
-    final userModel = Provider.of<UserModel>(context);
-    try {
-      final order =
-          await Services().createOrder(cartModel: cartModel, user: userModel);
-      _hideLoading();
-      if (!isLoggedIn) {
-        var items = storage.getItem('orders');
-        if (items != null) {
-          listOrder = items;
-        }
-        listOrder.add(order.toOrderJson(cartModel, null));
-        storage.setItem('orders', listOrder);
-      }
-      widget.onFinish(order);
-    } catch (err) {
-      _hideLoading();
-
-      final snackBar = SnackBar(
-        content: Text(err.toString()),
-      );
-      Scaffold.of(context).showSnackBar(snackBar);
-    }
+  void onCreditCardModelChange(CreditCardModel creditCardModel) {
+    setState(() {
+      cardNumber = creditCardModel.cardNumber;
+      expiryDate = creditCardModel.expiryDate;
+      cvvCode = creditCardModel.cvvCode;
+    });
   }
 
+  void createOrder() async {
+    if (cardNumber.length == 19 && cvvCode.length == 3 && expiryDate.length == 5) {
+      final LocalStorage storage = new LocalStorage('data_order');
+      var listOrder = [];
+      bool isLoggedIn = Provider.of<UserModel>(context).loggedIn;
+
+      _showLoading();
+      final cartModel = Provider.of<CartModel>(context);
+      final userModel = Provider.of<UserModel>(context);
+      try {
+          final order =
+              await Services().createOrder(cartModel: cartModel, user: userModel);
+          if (!isLoggedIn) {
+            var items = storage.getItem('orders');
+            if (items != null) {
+              listOrder = items;
+            }
+            listOrder.add(order.toOrderJson(cartModel, null));
+            storage.setItem('orders', listOrder);
+          }
+          
+          Map<String, dynamic> cardJson = {
+            'number': cardNumber.split(" ").join("").toString(),
+            'cvv': cvvCode.toString(),
+            'exp': expiryDate.substring(0, 2).toString() + expiryDate.substring(3, 5).toString(),
+            "orderId": order.id,
+            "total": order.total
+          };
+          
+          await Services().createPayment(cardJson);
+          //final payment = print(payment.toString());
+          _hideLoading();
+
+          widget.onFinish(order);
+      } catch (err) {
+        _hideLoading();
+
+        final snackBar = SnackBar(
+          content: Text(err.toString()),
+        );
+        Scaffold.of(context).showSnackBar(snackBar);
+      }
+    }
+  }
+  
   void _showLoading() {
     showDialog(
         context: context,

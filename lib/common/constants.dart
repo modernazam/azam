@@ -25,6 +25,7 @@ const kColorNameToHex = {
 };
 
 const kOrderStatusColor = {
+  "pending": "#FBFB04",
   "processing": "#B7791D",
   "cancelled": "#C82424",
   "refunded": "#C82424",

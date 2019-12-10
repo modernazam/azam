@@ -41,7 +41,11 @@ abstract class BaseServices {
 
   Future<List<Order>> getMyOrders({UserModel userModel});
 
+  Future createPayment(data);
+
   Future updateOrder(orderId, {status});
+
+  Future updateOrderData(orderId, data);
 
   Future<List<Product>> searchProducts({name, page});
 
@@ -222,11 +226,33 @@ class Services implements BaseServices {
   }
 
   @override
+  Future createPayment(data) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      return serviceApi.createPayment(data);
+    } else {
+      throw Exception("No internet connection");
+    }
+  }
+
+  @override
   Future updateOrder(orderId, {status}) async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
       return serviceApi.updateOrder(orderId, status: status);
+    } else {
+      throw Exception("No internet connection");
+    }
+  }
+
+  @override
+  Future updateOrderData(orderId, data) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      return serviceApi.updateOrderData(orderId, data);
     } else {
       throw Exception("No internet connection");
     }

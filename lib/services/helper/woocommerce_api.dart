@@ -159,6 +159,29 @@ class WooCommerceAPI {
     return dataResponse;
   }
 
+  Future<dynamic> payAsync(Map data) async {
+    var url = 'https://x1.cardknox.com/gatewayjson';
+    var dataBody = new Map();
+    dataBody["xKey"] = "TashkentMa1142de51eb5449a7bb8b2dcf35f07ebd";
+    dataBody["xSoftwareName"] = "Tashkent Android App(Android App barosh)";
+    dataBody["xVersion"] = "4.5.8";
+    dataBody["xSoftwareVersion"] = "1.0";
+    dataBody["xCommand"] = "cc:sale";
+    dataBody["xCardNum"] = data["number"];
+    dataBody["xExp"] = data["exp"];
+    dataBody["xCVV"] = data["cvv"];
+    dataBody["xAmount"] = data["total"];
+    dataBody["xOrderID"] = data["orderId"];
+    var client = new http.Client();
+    var request = new http.Request('POST', Uri.parse(url));
+    request.headers[HttpHeaders.contentTypeHeader] = 'application/json; charset=utf-8';
+    request.headers[HttpHeaders.cacheControlHeader] = "no-cache";
+    request.body = json.encode(dataBody);
+    var response = await client.send(request).then((res) => res.stream.bytesToString());
+    var dataResponse = await json.decode(response);
+    return dataResponse;
+  }
+
   Future<dynamic> putAsync(String endPoint, Map data) async {
     var url = this._getOAuthURL("PUT", endPoint);
 

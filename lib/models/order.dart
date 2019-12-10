@@ -96,7 +96,7 @@ class Order {
     return {
       "payment_method": cartModel.paymentMethod.id,
       "payment_method_title": cartModel.paymentMethod.title,
-      "set_paid": true,
+      "set_paid": false,
       "billing": cartModel.address.toJson(),
       "shipping": cartModel.address.toJson(),
       "line_items": lineItems,

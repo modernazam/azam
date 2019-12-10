@@ -262,15 +262,48 @@ class WooCommerce implements BaseServices {
     try {
       final params =
           Order().toJson(cartModel, user.user != null ? user.user.id : null);
-      print('orders: ' + params.toString());
+      //print('orders: ' + params.toString());
       var response = await wcApi.postAsync("orders", params);
-      print('response: ' + response.toString());
+      //print('response: ' + response.toString());
       if (cartModel.shippingMethod == null) {
         response["shipping_lines"][0]["method_title"] = null;
       }
       if (response["message"] != null) {
         throw Exception(response["message"]);
       } else {
+        return Order.fromJson(response);
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  @override
+  Future createPayment(data) async {
+    try {
+      final params = data;
+      var response = await wcApi.payAsync(params);
+      //print('response: ' + response.toString());
+      if (response["xResult"] != "A") {
+        throw Exception(response["xError"].toString());
+      } else {
+        updateOrderData(params["orderId"], {"status": "processing", "set_paid": true});
+        return response;
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  @override
+  Future updateOrderData(orderId, data) async {
+    try {
+      var response =
+          await wcApi.putAsync("orders/$orderId", data);
+      if (response["message"] != null) {
+        throw Exception(response["message"]);
+      } else {
+        //print(response);
         return Order.fromJson(response);
       }
     } catch (e) {
