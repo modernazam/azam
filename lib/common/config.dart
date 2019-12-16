@@ -40,8 +40,8 @@ const kAdvanceConfig = {
 /// We recommend to generate both ios and android to restrict by bundle app id
 /// The download package is remove these keys, please use your own key
 const kGoogleAPIKey = {
-    "android": "AIzaSyBcdFkSbAj4uEoVM-_AGqrZkRN0yVrIpQs",
-    "ios": "AIzaSyBcdFkSbAj4uEoVM-_AGqrZkRN0yVrIpQs"
+    "android": "AIzaSyBL_7TOT6NlM0lgLO6lpSnB6OMM31_h32Q",
+    "ios": "AIzaSyBL_7TOT6NlM0lgLO6lpSnB6OMM31_h32Q"
 };
 
 /// use to config the product image height for the product detail

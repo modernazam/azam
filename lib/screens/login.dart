@@ -142,13 +142,20 @@ class _LoginPageState extends State<LoginScreen> {
                       ),
 
                       const SizedBox(height: 60.0),
-
+                      /*
                       TextField(
                           controller: _usernameController,
                           onChanged: (value) => username = value,
                           decoration: const InputDecoration(
                             labelText: 'Username',
-                          )),
+                          )),*/
+                      TextField(
+                        controller: _usernameController,
+                        onChanged: (value) => username = value,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration:
+                            InputDecoration(labelText: 'Enter your email'),
+                      ),
 
                       const SizedBox(height: 12.0),
                       Stack(children: <Widget>[

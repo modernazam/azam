@@ -1,21 +1,37 @@
 {
   "project_info": {
-    "project_number": "306289363677",
-    "firebase_url": "https://tashkent-supermarket.firebaseio.com",
-    "project_id": "tashkent-supermarket",
-    "storage_bucket": "tashkent-supermarket.appspot.com"
+    "project_number": "887017416306",
+    "firebase_url": "https://tashkent-supermarket-com.firebaseio.com",
+    "project_id": "tashkent-supermarket-com",
+    "storage_bucket": "tashkent-supermarket-com.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:306289363677:android:58053e6d56b2df74a6e934",
+        "mobilesdk_app_id": "1:887017416306:android:b6e449b72c1d7375da44eb",
         "android_client_info": {
           "package_name": "com.tashkentsupermarket"
         }
       },
       "oauth_client": [
         {
-          "client_id": "306289363677-al6j005qqs2bgmn7kar4j1r1co6apmav.apps.googleusercontent.com",
+          "client_id": "887017416306-mg3faqopc2vceed2q7ql81o455baff15.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tashkentsupermarket",
+            "certificate_hash": "a08a21ca4baa920df8d0e85d0b47465469f8665a"
+          }
+        },
+        {
+          "client_id": "887017416306-a4oqav2se43errapbm8auar00pi7m6hs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tashkentsupermarket",
+            "certificate_hash": "1f85bc47c84ac168a511450de887abe433141b17"
+          }
+        },
+        {
+          "client_id": "887017416306-ldl30ufq585lnv5h3gkopuu1r465rgch.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.tashkentsupermarket",
@@ -23,20 +39,20 @@
           }
         },
         {
-          "client_id": "306289363677-ckt2s8vb2g74rigufcnkrvaji6ovrha6.apps.googleusercontent.com",
+          "client_id": "887017416306-na953173ost5gvtgi33544445o861fpj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBDwjb4f6AQizUJFN5517ZYhNq6FQw4aQk"
+          "current_key": "AIzaSyBeAttEmQX2G_XRa46eoYUw9I2GRa_zeHg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "306289363677-ckt2s8vb2g74rigufcnkrvaji6ovrha6.apps.googleusercontent.com",
+              "client_id": "887017416306-na953173ost5gvtgi33544445o861fpj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

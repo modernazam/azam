@@ -4,8 +4,10 @@ import 'package:tashkentsupermarket/common/config.dart';
 import 'package:tashkentsupermarket/common/constants.dart';
 import 'package:tashkentsupermarket/common/styles.dart';
 import 'package:tashkentsupermarket/common/tools.dart';
+import 'package:tashkentsupermarket/models/credit_card_model.dart';
 import 'package:tashkentsupermarket/models/order.dart';
 import 'package:tashkentsupermarket/services/index.dart';
+import 'package:tashkentsupermarket/widgets/credit_card_form.dart';
 
 class OrderDetail extends StatefulWidget {
   final Order order;
@@ -19,6 +21,9 @@ class OrderDetail extends StatefulWidget {
 
 class _OrderDetailState extends State<OrderDetail> {
   final services = Services();
+  String cardNumber = '';
+  String expiryDate = '';
+  String cvvCode = '';
 
   @override
   Widget build(BuildContext context) {
@@ -151,10 +156,37 @@ class _OrderDetailState extends State<OrderDetail> {
                   widget.order.billing.city +
                   ", " +
                   getCountryName(widget.order.billing.country)),
-              if (widget.order.status == "processing")
+              if (widget.order.status == "pending")
+                Column(
+                    children: <Widget>[
+                      SizedBox(height: 10),
+                      CreditCardForm(
+                          onCreditCardModelChange: onCreditCardModelChange,
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ButtonTheme(
+                              height: 45,
+                              child: RaisedButton(
+                                  textColor: Colors.white,
+                                  color: HexColor("#08d52f"),
+                                  onPressed: () {
+                                    paymentOrder();
+                                  },
+                                  child: Text("Payment".toUpperCase(),
+                                      style: TextStyle(fontWeight: FontWeight.w700))),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+              if (widget.order.status == "pending")
                 Column(
                   children: <Widget>[
-                    SizedBox(height: 30),
+                    SizedBox(height: 20),
                     Row(
                       children: [
                         Expanded(
@@ -172,7 +204,7 @@ class _OrderDetailState extends State<OrderDetail> {
                         )
                       ],
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                   ],
                 )
             ],
@@ -203,6 +235,43 @@ class _OrderDetailState extends State<OrderDetail> {
       );
       Scaffold.of(context).showSnackBar(snackBar);
     }
+  }
+
+  void paymentOrder() async {
+    if (cardNumber.length == 19 && cvvCode.length == 3 && expiryDate.length == 5) {
+      _showLoading();
+      try {
+        Map<String, dynamic> cardJson = {
+          'number': cardNumber.split(" ").join("").toString(),
+          'cvv': cvvCode.toString(),
+          'exp': expiryDate.substring(0, 2).toString() + expiryDate.substring(3, 5).toString(),
+          "orderId": widget.order.id,
+          "total": widget.order.total
+        };
+
+        final payment = await services.createPayment(cardJson);
+        print(payment["xError"]);
+        _hideLoading();
+        if (payment["xResult"] != "A") {
+          final snackBar = SnackBar(
+            content: Text(payment["xError"].toString()),
+          );
+          Scaffold.of(context).showSnackBar(snackBar);
+        }
+        widget.onRefresh();
+        //Navigator.of(context).pop();
+      } catch (err) {
+        _hideLoading();
+      }
+    }
+  }
+
+  void onCreditCardModelChange(CreditCardModel creditCardModel) {
+    setState(() {
+      cardNumber = creditCardModel.cardNumber;
+      expiryDate = creditCardModel.expiryDate;
+      cvvCode = creditCardModel.cvvCode;
+    });
   }
 
   void _showLoading() {

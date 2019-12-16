@@ -284,12 +284,10 @@ class WooCommerce implements BaseServices {
       final params = data;
       var response = await wcApi.payAsync(params);
       //print('response: ' + response.toString());
-      if (response["xResult"] != "A") {
-        throw Exception(response["xError"].toString());
-      } else {
+      if (response["xResult"] == "A") {
         updateOrderData(params["orderId"], {"status": "processing", "set_paid": true});
-        return response;
       }
+      return response;
     } catch (e) {
       throw e;
     }

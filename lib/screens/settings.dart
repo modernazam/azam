@@ -1,3 +1,6 @@
+import 'dart:io' show Platform;
+
+import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 import 'package:notification_permissions/notification_permissions.dart';
 import 'package:provider/provider.dart';
@@ -26,18 +29,32 @@ class SettingScreenState extends State<SettingScreen>
     with TickerProviderStateMixin, WidgetsBindingObserver {
   final bannerHigh = 200.0;
   bool enabledNotification = true;
-
+  String appID = "";
+  String output = "";
+  
+  /*
   RateMyApp _rateMyApp = RateMyApp(
     minDays: 7,
     minLaunches: 10,
     remindDays: 7,
     remindLaunches: 10,
-  );
+  );*/
 
   @override
   void initState() {
     super.initState();
-
+    if (Platform.isIOS) {
+      AppReview.requestReview.then((onValue) {
+        //print(onValue);
+      });
+    }else {
+      AppReview.getAppID.then((String onValue) {
+        setState(() {
+          appID = onValue;
+        });
+        //print("App ID" + appID);
+      });
+    }
     Future.delayed(Duration.zero, ()async{
       checkNotificationPermission();
     });
@@ -294,7 +311,13 @@ class SettingScreenState extends State<SettingScreen>
                         elevation: 0,
                         child: ListTile(
                           onTap: () {
-                            _rateMyApp.showRateDialog(context).then((v) => setState(() {}));
+                            AppReview.requestReview.then((String onValue) {
+                              setState(() {
+                                output = onValue;
+                              });
+                              //print(onValue);
+                            });
+                            //_rateMyApp.showRateDialog(context).then((v) => setState(() {}));
                           },
                           leading: Image.asset(
                             'assets/icons/profile/icon-star.png',
@@ -335,4 +358,5 @@ class SettingScreenState extends State<SettingScreen>
       ),
     );
   }
+  String _dateToString(DateTime date) => date.day.toString().padLeft(2, '0') + '/' + date.month.toString().padLeft(2, '0') + '/' + date.year.toString();
 }

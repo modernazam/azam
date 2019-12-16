@@ -309,8 +309,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
       final cartModel = Provider.of<CartModel>(context);
       final userModel = Provider.of<UserModel>(context);
       try {
-          final order =
-              await Services().createOrder(cartModel: cartModel, user: userModel);
+          final order = await Services().createOrder(cartModel: cartModel, user: userModel);
           if (!isLoggedIn) {
             var items = storage.getItem('orders');
             if (items != null) {
@@ -328,10 +327,16 @@ class _PaymentMethodsState extends State<PaymentMethods> {
             "total": order.total
           };
           
-          await Services().createPayment(cardJson);
+          final payment = await Services().createPayment(cardJson);
           //final payment = print(payment.toString());
           _hideLoading();
-
+          
+          if (payment["xResult"] != "A") {
+            final snackBar = SnackBar(
+              content: Text(payment["xError"].toString()),
+            );
+            Scaffold.of(context).showSnackBar(snackBar);
+          }
           widget.onFinish(order);
       } catch (err) {
         _hideLoading();
