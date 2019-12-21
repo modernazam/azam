@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">TashkentSuperMarket</string>
     <string name="facebook_app_id">507807776505018</string>
-    <string name="ak_login_protocol_scheme">ak507807776505018</string>
+    <string name="ak_login_protocol_scheme">fb507807776505018</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">fb557771608123485fb557771608123485</string>
     <string name="api_key">AIzaSyBL_7TOT6NlM0lgLO6lpSnB6OMM31_h32Q</string>
 </resources>

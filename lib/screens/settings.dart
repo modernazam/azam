@@ -4,10 +4,8 @@ import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 import 'package:notification_permissions/notification_permissions.dart';
 import 'package:provider/provider.dart';
-import 'package:rate_my_app/rate_my_app.dart';
 import 'package:tashkentsupermarket/common/constants.dart';
 import 'package:tashkentsupermarket/common/styles.dart';
-import 'package:tashkentsupermarket/models/app.dart';
 import 'package:tashkentsupermarket/models/user.dart';
 import 'package:tashkentsupermarket/models/wishlist.dart';
 
@@ -358,5 +356,4 @@ class SettingScreenState extends State<SettingScreen>
       ),
     );
   }
-  String _dateToString(DateTime date) => date.day.toString().padLeft(2, '0') + '/' + date.month.toString().padLeft(2, '0') + '/' + date.year.toString();
 }

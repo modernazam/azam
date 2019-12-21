@@ -5,14 +5,12 @@ import 'package:tashkentsupermarket/common/constants.dart';
 import 'package:tashkentsupermarket/common/styles.dart';
 import 'package:tashkentsupermarket/common/tools.dart';
 import 'package:tashkentsupermarket/models/credit_card_model.dart';
-import 'package:tashkentsupermarket/models/order.dart';
 import 'package:tashkentsupermarket/models/payment_method.dart';
 import 'package:tashkentsupermarket/models/user.dart';
 import 'package:tashkentsupermarket/models/cart.dart';
 import 'package:tashkentsupermarket/services/index.dart';
 import 'package:tashkentsupermarket/widgets/credit_card_form.dart';
 
-import 'payment_webview.dart';
 import 'package:localstorage/localstorage.dart';
 
 class PaymentMethods extends StatefulWidget {

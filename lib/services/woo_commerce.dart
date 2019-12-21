@@ -146,21 +146,23 @@ class WooCommerce implements BaseServices {
     const cookieLifeTime = 120960000000;
 
     try {
-      var endPoint = "$url/api/user/fb_connect/?second=$cookieLifeTime"
-          "&access_token=$token$isSecure";
+      var endPoint = "$url"+"api/user/fb_connect/?second=$cookieLifeTime&access_token=$token$isSecure";
 
       var response = await http.get(endPoint);
+      //print(endPoint + " " +response.body);
+      /*
+      print('token: $token$isSecure');
+      print(endPoint + " " +response.body);*/
       var jsonDecode = convert.jsonDecode(response.body);
-      print('$token$isSecure');
 
       if (jsonDecode['status'] != 'ok') {
         return jsonDecode['msg'];
       }
-      print(jsonDecode);
+      //print(jsonDecode);
 
       return User.fromJsonFB(jsonDecode);
     } catch (e) {
-      // print(e.toString());
+      //print(e.toString());
       throw e;
     }
   }

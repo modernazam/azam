@@ -25,8 +25,7 @@ class UserModel with ChangeNotifier {
         List<String> permissions = ['email', "public_profile"];
         final FacebookLoginResult result = await FacebookLogin().logIn(permissions);
 
-        print(result);
-
+        print("toString: " + result.toString());
         switch (result.status) {
           case FacebookLoginStatus.loggedIn:
             final FacebookAccessToken accessToken = result.accessToken;
@@ -37,7 +36,7 @@ class UserModel with ChangeNotifier {
 
             loggedIn = true;
 
-            print(user);
+            //print(user);
             saveUser(user);
 
             success(user);

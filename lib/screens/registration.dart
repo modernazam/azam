@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tashkentsupermarket/common/tools.dart';
 import 'package:tashkentsupermarket/models/user.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -10,9 +11,9 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
+  final _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   String firstName, lastName, username, password;
-  final TextEditingController _usernameController = TextEditingController();
   bool isChecked = false;
 
   void _welcomeDiaLog(User user) {
@@ -76,146 +77,189 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           elevation: 0.0,
         ),
         body: SafeArea(
-            child: ListenableProvider<UserModel>.value(
+          child: ListenableProvider<UserModel>.value(
           value: Provider.of<UserModel>(context),
           child: Consumer<UserModel>(builder: (context, value, child) {
             return SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 70.0,
-                    ),
-                    Container(
-                      child: Center(
-                          child: Image.asset(
-                        'assets/images/logo.png',
-                        width: MediaQuery.of(context).size.width / 2,
-                        fit: BoxFit.contain,
-                      )),
-                    ),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    TextField(
-                      onChanged: (value) => firstName = value,
-                      decoration: InputDecoration(
-                        labelText: 'First Name ',
+                child: 
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 70.0,
                       ),
-                    ),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    TextField(
-                      onChanged: (value) => lastName = value,
-                      decoration: InputDecoration(
-                        labelText: 'Last Name ',
+                      Container(
+                        child: Center(
+                            child: Image.asset(
+                          'assets/images/logo.png',
+                          width: MediaQuery.of(context).size.width / 2,
+                          fit: BoxFit.contain,
+                        )),
                       ),
-                    ),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    TextField(
-                      controller: _usernameController,
-                      onChanged: (value) => username = value,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration:
-                          InputDecoration(labelText: 'Enter your email'),
-                    ),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    TextField(
-                      obscureText: true,
-                      onChanged: (value) => password = value,
-                      decoration: InputDecoration(
-                        labelText: 'Enter your password',
+                      SizedBox(
+                        height: 30.0,
                       ),
-                    ),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Checkbox(
-                          value: isChecked,
-                          activeColor: Theme.of(context).primaryColor,
-                          checkColor: Colors.white,
-                          onChanged: (value) {
-                            //print(value);
-                            isChecked = !isChecked;
-                            setState(() {});
-                          },
+                      TextFormField(
+                        //onChanged: (value) => firstName = value,
+                        decoration: InputDecoration(
+                          labelText: 'First Name ',
                         ),
-                        Text('I want to create an account',
-                            style: TextStyle(fontSize: 16.0)),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: Material(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        elevation: 0,
-                        child: MaterialButton(
-                          onPressed: () async {
-                            try {
-                              await _auth.createUserWithEmailAndPassword(
-                                  email: username, password: password);
-                            } catch (e) {
-//                              print(e);
-                            }
-                            _submitRegister(
-                                firstName, lastName, username, password);
-                          },
-                          minWidth: 200.0,
-                          elevation: 0.0,
-                          height: 42.0,
-                          child: Text(
-                            value.loading == true
-                                ? 'LOADING...'
-                                : 'CREATE AN ACCOUNT',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                        initialValue: firstName,
+                        validator: (val) {
+                          return val.isEmpty ? "The first name field is required" : null;
+                        },
+                        onSaved: (String value) {
+                          firstName = value;
+                        }
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      TextFormField(
+                        //onChanged: (value) => lastName = value,
+                        decoration: InputDecoration(
+                          labelText: 'Last Name ',
+                        ),
+                        initialValue: lastName,
+                        validator: (val) {
+                          return val.isEmpty ? "The last name field is required" : null;
+                        },
+                        onSaved: (String value) {
+                          lastName = value;
+                        }
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      TextFormField(
+                        initialValue: username,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(labelText: "Enter your email"),
+                        validator: (val) {
+                          if (val.isEmpty) {
+                            return "The email field is required";
+                          }
+                          return Validator.validateEmail(val);
+                        },
+                        onSaved: (String value) {
+                          username = value;
+                        }
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      TextFormField(
+                        obscureText: true,
+                        onSaved: (String val) {
+                          password = val;
+                        },
+                        initialValue: password,
+                        //controller: _passwordController,
+                        validator: validatePassword,
+                        decoration: const InputDecoration(
+                          labelText: 'Password',
+                        )
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      Row(
                         children: <Widget>[
-                          Text(
-                            'or ',
-                            style: TextStyle(color: Colors.black45),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pop(context);
+                          Checkbox(
+                            value: isChecked,
+                            activeColor: Theme.of(context).primaryColor,
+                            checkColor: Colors.white,
+                            onChanged: (value) {
+                              //print(value);
+                              isChecked = !isChecked;
+                              setState(() {});
                             },
-                            child: Text(
-                              'login to your account',
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  decoration: TextDecoration.underline),
-                            ),
                           ),
+                          Text('I want to create an account',
+                              style: TextStyle(fontSize: 16.0)),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.0),
+                        child: Material(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          elevation: 0,
+                          child: MaterialButton(
+                            onPressed: () async {
+                              if (_formKey.currentState.validate()) {
+                                  _formKey.currentState.save();
+                                try {
+                                  await _auth.createUserWithEmailAndPassword(
+                                      email: username, password: password);
+                                } catch (e) {
+                                  //  print(e);
+                                }
+                                _submitRegister(
+                                    firstName, lastName, username, password);
+                              }
+                            },
+                            minWidth: 200.0,
+                            elevation: 0.0,
+                            height: 42.0,
+                            child: Text(
+                              value.loading == true
+                                  ? 'LOADING...'
+                                  : 'CREATE AN ACCOUNT',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'or ',
+                              style: TextStyle(color: Colors.black45),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'login to your account',
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    decoration: TextDecoration.underline),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
+                )
+              )
             );
-          }),
+          })
         )));
   }
+}
+
+String validatePassword(String value) {
+    if (value.length == 0) {
+      return "Password is required";
+    } else 
+    if (!(value.length > 5) && value.isNotEmpty) {
+      return "The minimum number of digits is 6";
+    }
+    return null;
 }
