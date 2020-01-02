@@ -298,7 +298,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
   }
 
   void createOrder() async {
-    if (cardNumber.length == 19 && cvvCode.length == 3 && expiryDate.length == 5) {
+    //if (cardNumber.length == 19 && cvvCode.length == 3 && expiryDate.length == 5) {
       final LocalStorage storage = new LocalStorage('data_order');
       var listOrder = [];
       bool isLoggedIn = Provider.of<UserModel>(context).loggedIn;
@@ -318,9 +318,9 @@ class _PaymentMethodsState extends State<PaymentMethods> {
           }
           
           Map<String, dynamic> cardJson = {
-            'number': cardNumber.split(" ").join("").toString(),
-            'cvv': cvvCode.toString(),
-            'exp': expiryDate.substring(0, 2).toString() + expiryDate.substring(3, 5).toString(),
+            'number': cardNumber,
+            'cvv': cvvCode,
+            'exp': expiryDate,
             "orderId": order.id,
             "total": order.total
           };
@@ -344,7 +344,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
         );
         Scaffold.of(context).showSnackBar(snackBar);
       }
-    }
+    //}
   }
   
   void _showLoading() {

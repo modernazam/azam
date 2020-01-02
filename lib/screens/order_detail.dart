@@ -238,13 +238,23 @@ class _OrderDetailState extends State<OrderDetail> {
   }
 
   void paymentOrder() async {
-    if (cardNumber.length == 19 && cvvCode.length == 3 && expiryDate.length == 5) {
+        /*
+        Map<String, dynamic> cardJson = {
+          'number': cardNumber,
+          'cvv': cvvCode,
+          'exp': expiryDate,
+          "orderId": widget.order.id,
+          "total": widget.order.total
+        };
+        print(cardJson);
+    if ((cardNumber.length > 14 && cardNumber.length < 17) && (cvvCode.length > 2 && cvvCode.length < 4) && expiryDate.length == 4) {
+      */
       _showLoading();
       try {
         Map<String, dynamic> cardJson = {
-          'number': cardNumber.split(" ").join("").toString(),
-          'cvv': cvvCode.toString(),
-          'exp': expiryDate.substring(0, 2).toString() + expiryDate.substring(3, 5).toString(),
+          'number': cardNumber,
+          'cvv': cvvCode,
+          'exp': expiryDate,
           "orderId": widget.order.id,
           "total": widget.order.total
         };
@@ -263,7 +273,8 @@ class _OrderDetailState extends State<OrderDetail> {
       } catch (err) {
         _hideLoading();
       }
-    }
+    /*
+    }*/
   }
 
   void onCreditCardModelChange(CreditCardModel creditCardModel) {

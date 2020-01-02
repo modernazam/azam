@@ -38,13 +38,16 @@ class _CreditCardFormState extends State<CreditCardForm> {
 
   void Function(CreditCardModel) onCreditCardModelChange;
   CreditCardModel creditCardModel;
-
+  /*
   final MaskedTextController _cardNumberController =
       MaskedTextController(mask: '0000 0000 0000 0000');
   final TextEditingController _expiryDateController =
       MaskedTextController(mask: '00/00');
   final TextEditingController _cvvCodeController =
-      MaskedTextController(mask: '000');
+      MaskedTextController(mask: '000');*/
+  final TextEditingController _cardNumberController = TextEditingController();
+  final TextEditingController _expiryDateController = TextEditingController();
+  final TextEditingController _cvvCodeController = TextEditingController();
 
   FocusNode cvvFocusNode = FocusNode();
 
@@ -114,7 +117,8 @@ class _CreditCardFormState extends State<CreditCardForm> {
               margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
               child: TextFormField(
                 validator: (value) {
-                  if (value.isEmpty || value.length < 19) {
+                  //print(value.length.toString());
+                  if (value.isEmpty || value.length < 14 || value.length > 17) {
                     return 'Please enter Card number';
                   }
                   return null;
@@ -143,7 +147,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
               margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
               child: TextFormField(
                 validator: (value) {
-                  if (value.isEmpty || value.length < 5) {
+                  if (value.isEmpty || value.length != 4) {
                     return 'Please enter Expired date';
                   }
                   return null;
@@ -171,7 +175,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
               margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
               child: TextFormField(
                 validator: (value) {
-                  if (value.isEmpty || value.length < 3) {
+                  if (value.isEmpty || value.length < 3 || value.length > 4) {
                     return 'Please enter CVV code';
                   }
                   return null;

@@ -34,7 +34,8 @@ class WooCommerce implements BaseServices {
   Future getNonce({method = 'register'}) async {
     try {
       http.Response response = await http.get(
-          "$url/api/get_nonce/?controller=user&method=$method&$isSecure");
+          "$url/api/get_nonce/?controller=user&method=$method&$isSecure",
+          headers: {'Content-Type': 'application/json; charset=utf-8'});
       if (response.statusCode == 200) {
         return convert.jsonDecode(response.body)['nonce'];
       } else {
@@ -148,7 +149,8 @@ class WooCommerce implements BaseServices {
     try {
       var endPoint = "$url"+"api/user/fb_connect/?second=$cookieLifeTime&access_token=$token$isSecure";
 
-      var response = await http.get(endPoint);
+      var response = await http.get(endPoint,
+          headers: {'Content-Type': 'application/json; charset=utf-8'});
       //print(endPoint + " " +response.body);
       /*
       print('token: $token$isSecure');
@@ -349,7 +351,8 @@ class WooCommerce implements BaseServices {
 //      print("$url/api/user/get_currentuserinfo/?cookie=$cookie&$isSecure");
 
       final http.Response response = await http.get(
-          "$url/api/user/get_currentuserinfo/?cookie=$cookie&$isSecure");
+          "$url/api/user/get_currentuserinfo/?cookie=$cookie&$isSecure",
+          headers: {'Content-Type': 'application/json; charset=utf-8'});
       if (response.statusCode == 200) {
         return User.fromAuthUser(
             convert.jsonDecode(response.body)['user'], cookie);
@@ -367,8 +370,8 @@ class WooCommerce implements BaseServices {
     try {
       String niceName = firstName + lastName;
       var nonce = await getNonce();
-      final http.Response response = await http.get(
-          "$url/api/user/register/?insecure=cool&nonce=$nonce&username=$username&user_pass=$password&email=$username&user_nicename=$niceName&display_name=$niceName&$isSecure");
+      final http.Response response = await http.get("$url/api/user/register/?insecure=cool&nonce=$nonce&username=$username&user_pass=$password&email=$username&user_nicename=$niceName&display_name=$niceName&$isSecure",
+        headers: {'Content-Type': 'application/json; charset=utf-8'});
       if (response.statusCode == 200) {
         var cookie = convert.jsonDecode(response.body)['cookie'];
         return await this.getUserInfo(cookie);
@@ -387,7 +390,8 @@ class WooCommerce implements BaseServices {
     var cookieLifeTime = 120960000000;
     try {
       final http.Response response = await http.get(
-          "$url/api/user/generate_auth_cookie/?second=$cookieLifeTime&username=$username&password=$password&$isSecure");
+          "$url/api/user/generate_auth_cookie/?second=$cookieLifeTime&username=$username&password=$password&$isSecure",
+          headers: {'Content-Type': 'application/json; charset=utf-8'});
 
       if (response.statusCode == 200) {
         var cookie = convert.jsonDecode(response.body)['cookie'];
