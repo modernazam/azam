@@ -26,8 +26,12 @@ class FStoreNotification {
       body = notification['body'];
       title = notification['title'];
       seen = false;
-      int time = notification['google.sent_time'] ?? ['from'];
-      date = (new DateTime.fromMillisecondsSinceEpoch(time)).toString();
+      int time = notification['google.sent_time'] ?? json['google.sent_time'] ?? 0;
+      if (time != 0) {
+        date = DateTime.fromMillisecondsSinceEpoch(time).toString();
+      } else {
+        date = DateTime.now().toString();
+      }
       print(date);
     } catch (e) {
       print(e.toString());
